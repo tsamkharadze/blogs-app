@@ -7,30 +7,59 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useTranslation } from "react-i18next";
+
+interface Article {
+  title: string;
+  description: string[];
+  content: string;
+  tags: string[];
+}
 
 const Cards = () => {
+  const { t } = useTranslation();
+  console.log(t(`card-translation.${0}.title`));
+  const articles = t("card-translation", { returnObjects: true }) as Article[];
+  console.log(articles);
+
   return (
-    <div>
-      <Card className="cursor-pointer">
-        <CardHeader>
-          <img
-            src="https://g-zwkebgiacpe.vusercontent.net/placeholder.svg?height=200&width=400"
-            className="max-w-100% w-full rounded-lg"
-          />
-          <CardTitle className="font-bold">Card Title</CardTitle>
-          <CardDescription className="text-sm">
-            Card Description
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p>Card Content</p>
-        </CardContent>
-        <CardFooter className="max-h-80 p-6">
-          <Badge variant={"secondary"}>Blockchain</Badge>
-          <Badge variant={"secondary"}>Technology</Badge>
-          <Badge variant={"secondary"}>Future</Badge>
-        </CardFooter>
-      </Card>
+    <div className="mb-8 flex flex-col gap-4">
+      {/* მთლიანი ქარდის მეპი */}
+      {articles.map((article: Article, index: number) => (
+        <Card key={index} className="cursor-pointer">
+          <CardHeader>
+            <img
+              src="https://g-zwkebgiacpe.vusercontent.net/placeholder.svg?height=200&width=400"
+              alt={article.title}
+              className="max-w-100% h-[200px] w-full rounded-lg object-cover"
+            />
+            <CardTitle className="font-bold">{article.title}</CardTitle>
+
+            {/*map დესქრიფშენისთვის  */}
+            <CardDescription className="text-sm">
+              {article.description.map((desc, descIndex) => (
+                <span key={descIndex}>
+                  {desc}
+                  {descIndex < article.description.length - 1 && " • "}
+                </span>
+              ))}
+            </CardDescription>
+          </CardHeader>
+
+          <CardContent>
+            <p>{article.content}</p>
+          </CardContent>
+
+          {/* თეგების მეპი */}
+          <CardFooter className="flex max-h-80 gap-1 p-6">
+            {article.tags.map((tag, tagIndex) => (
+              <Badge key={tagIndex} variant="secondary">
+                {tag}
+              </Badge>
+            ))}
+          </CardFooter>
+        </Card>
+      ))}
     </div>
   );
 };
