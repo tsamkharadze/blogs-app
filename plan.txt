@@ -1,0 +1,8 @@
+bitblogs.vercel
+
+avatar
+badge 
+popover menu, select ან switch ენის ვცლილებისთბის
+form/თაბას რეგისტრაციისთბის
+
+

@@ -9,6 +9,7 @@ export default [
   {
     ignores: ["dist"],
   },
+
   {
     files: ["**/*.{ts,tsx}"],
     languageOptions: {
@@ -22,6 +23,7 @@ export default [
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
     },
+
     rules: {
       ...js.configs.recommended.rules,
       ...tsPlugin.configs.recommended.rules,
