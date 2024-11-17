@@ -41,10 +41,8 @@ const Aside = () => {
               <AvatarFallback></AvatarFallback>
             </Avatar>
             <div>
-              <p className="font-semibold hover:underline">Alice Johnson</p>
-              <p className="text-sm text-muted-foreground">
-                Blockchain Enthusiast
-              </p>
+              <p className="font-semibold hover:underline">Bob Smith</p>
+              <p className="text-sm text-muted-foreground">Crypto Analyst</p>
             </div>
           </div>
           <div className="flex cursor-pointer gap-4">
@@ -53,10 +51,8 @@ const Aside = () => {
               <AvatarFallback></AvatarFallback>
             </Avatar>
             <div>
-              <p className="font-semibold hover:underline">Alice Johnson</p>
-              <p className="text-sm text-muted-foreground">
-                Blockchain Enthusiast
-              </p>
+              <p className="font-semibold hover:underline">Carol Williams</p>
+              <p className="text-sm text-muted-foreground">Tech Journalist</p>
             </div>
           </div>
         </div>

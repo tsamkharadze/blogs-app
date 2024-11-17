@@ -14,20 +14,26 @@ const Header = () => {
           <Link to={"/home"}>
             <p className="text-2xl font-bold dark:text-white">BitBlogs</p>
           </Link>
-          <div className="flex space-x-4 text-muted-foreground hover:text-foreground dark:hover:text-white">
+          <div className="flex space-x-4 text-muted-foreground">
             <Link to={"/home"}>
-              <p className="cursor-pointer">{t("header-translation.home")}</p>
+              <p className="cursor-pointer hover:text-foreground dark:hover:text-white">
+                {t("header-translation.home")}
+              </p>
             </Link>
             <Link to={"/write"}>
-              <p className="cursor-pointer">{t("header-translation.write")}</p>
+              <p className="cursor-pointer hover:text-foreground dark:hover:text-white">
+                {t("header-translation.write")}
+              </p>
             </Link>
             <Link to={"/about"}>
-              <p className="cursor-pointer">{t("header-translation.about")}</p>
+              <p className="cursor-pointer hover:text-foreground dark:hover:text-white">
+                {t("header-translation.about")}
+              </p>
             </Link>
           </div>
           <div className="flex items-center gap-5">
             <SearchIcon />
-            <Link to={"/signin"}>
+            <Link to={"/auth"}>
               <Button className="bg-primary">
                 {t("header-translation.sign_in")}
               </Button>

@@ -18,9 +18,7 @@ interface Article {
 
 const Cards = () => {
   const { t } = useTranslation();
-  console.log(t(`card-translation.${0}.title`));
   const articles = t("card-translation", { returnObjects: true }) as Article[];
-  console.log(articles);
 
   return (
     <div className="mb-8 flex flex-col gap-4">
