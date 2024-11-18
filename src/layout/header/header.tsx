@@ -1,9 +1,9 @@
-import { SearchIcon } from "lucide-react";
 import { Button } from "../../components/ui/button";
 import { Link } from "react-router-dom";
 import { ModeToggle } from "@/components/mode-toggle";
 import { ChangeLagunge } from "./lang-switcher";
 import { useTranslation } from "react-i18next";
+import Search from "./search";
 
 const Header = () => {
   const { t } = useTranslation();
@@ -32,7 +32,7 @@ const Header = () => {
             </Link>
           </div>
           <div className="flex items-center gap-5">
-            <SearchIcon />
+            <Search />
             <Link to={"/auth"}>
               <Button className="bg-primary">
                 {t("header-translation.sign_in")}
