@@ -69,18 +69,18 @@ export function Authorization() {
                   <Input placeholder="john@example.com" id="new" type="email" />
                 </div>
                 <div className="space-y-1">
-                  <Label htmlFor="new">Password</Label>
+                  <Label htmlFor="password">Password</Label>
                   <Input
                     placeholder="Enter your Password"
-                    id="new"
+                    id="password"
                     type="password"
                   />
                 </div>
                 <div className="space-y-1">
-                  <Label htmlFor="new">Confirm Password</Label>
+                  <Label htmlFor="confirmPassword">Confirm Password</Label>
                   <Input
                     placeholder="Confirm your Password"
-                    id="new"
+                    id="confirmPassword"
                     type="password"
                   />
                 </div>

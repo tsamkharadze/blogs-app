@@ -1,10 +1,11 @@
-import Write from "../component/write-article";
+import AuthorView from "@/pages/author-page/view/author-view";
+// import Write from "../component/write-article";
 
 const WriteView = () => {
   return (
-    <div>
-      <Write />
-    </div>
+    <>
+      <AuthorView />
+    </>
   );
 };
 
