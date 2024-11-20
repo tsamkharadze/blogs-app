@@ -10,12 +10,105 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { login, register } from "@/supabase/auth";
+import { useMutation } from "@tanstack/react-query";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 export function Authorization() {
+  // const navigate = useNavigate();
+
+  // ლოგინის სთეითები
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  // რეგისრტარიის სთეითები
+  const [newName, setNewName] = useState("");
+  const [newEmail, setNewEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+
+  // ლოგინის ჰენდლერები
+
+  const { mutate: handleLogin } = useMutation({
+    mutationKey: ["login"],
+    mutationFn: login,
+  });
+
+  const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setEmail(value);
+  };
+  const handlePassword = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setPassword(value);
+  };
+
+  const handleSubmitLogin = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const isEmaillfilled = !!email;
+    const isPaswordFilled = !!password;
+
+    if (isEmaillfilled && isPaswordFilled) {
+      handleLogin({ email: email, password: password });
+    }
+  };
+
+  // რეგისტრაციის ჰენდლერები
+
+  const { mutate: handleRegister } = useMutation({
+    mutationKey: ["register"],
+    mutationFn: register,
+  });
+
+  console.log(newName);
+  const handleNewName = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setNewName(value);
+  };
+
+  const handleNewEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setNewEmail(value);
+  };
+  const handleNewPassword = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setNewPassword(value);
+  };
+  const handleConfirmNewPassword = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setConfirmNewPassword(value);
+  };
+  const handleSubmitNewUser = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const isEmaillfilled = !!newEmail;
+    const isPaswordFilled = !!newPassword;
+
+    if (
+      isEmaillfilled &&
+      isPaswordFilled &&
+      newPassword === confirmNewPassword
+    ) {
+      handleRegister({ email: newEmail, password: newPassword });
+    }
+  };
+
+  // // Handle tab change to update URL
+  // const handleTabChange = (value: string) => {
+  //   if (value === "LogIn") {
+  //     navigate("/authorization/signIn");
+  //   } else if (value === "register") {
+  //     navigate("/authorization/register");
+  //   }
+  // };
+
   return (
     <div className="flex h-[500px] min-h-screen items-center justify-center">
       <div className="h-[500px]">
-        <Tabs defaultValue="LogIn" className="w-[400px]">
+        <Tabs
+          defaultValue="LogIn"
+          className="w-[400px]"
+          // onValueChange={handleTabChange}
+        >
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="LogIn">Log in</TabsTrigger>
             <TabsTrigger value="register">Register</TabsTrigger>
@@ -28,27 +121,31 @@ export function Authorization() {
                   Enter your credentials to access your account
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-2">
-                <div className="space-y-1">
-                  <Label htmlFor="name">Email</Label>
-                  <Input
-                    type="email"
-                    id="name"
-                    placeholder="john@example.com"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <Label htmlFor="username">Password</Label>
-                  <Input
-                    id="username"
-                    type="password"
-                    placeholder="Enter your Password"
-                  />
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button>Log in</Button>
-              </CardFooter>
+              <form onSubmit={handleSubmitLogin} className="space-y-2">
+                <CardContent>
+                  <div className="space-y-1">
+                    <Label htmlFor="name">Email</Label>
+                    <Input
+                      type="email"
+                      id="name"
+                      placeholder="john@example.com"
+                      onChange={handleEmail}
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <Label htmlFor="username">Password</Label>
+                    <Input
+                      id="username"
+                      type="password"
+                      placeholder="Enter your Password"
+                      onChange={handlePassword}
+                    />
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <Button>Log in</Button>
+                </CardFooter>
+              </form>
             </Card>
           </TabsContent>
           <TabsContent value="register">
@@ -59,35 +156,55 @@ export function Authorization() {
                   Create your account to start blogging
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-2">
-                <div className="space-y-1">
-                  <Label htmlFor="current">Name</Label>
-                  <Input placeholder="Your Name" id="current" />
-                </div>
-                <div className="space-y-1">
-                  <Label htmlFor="new">Email</Label>
-                  <Input placeholder="john@example.com" id="new" type="email" />
-                </div>
-                <div className="space-y-1">
-                  <Label htmlFor="password">Password</Label>
-                  <Input
-                    placeholder="Enter your Password"
-                    id="password"
-                    type="password"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <Label htmlFor="confirmPassword">Confirm Password</Label>
-                  <Input
-                    placeholder="Confirm your Password"
-                    id="confirmPassword"
-                    type="password"
-                  />
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button>Sign up</Button>
-              </CardFooter>
+              <form onSubmit={handleSubmitNewUser} className="space-y-2">
+                <CardContent>
+                  <div className="space-y-1">
+                    <Label htmlFor="current">Name</Label>
+                    <Input
+                      placeholder="Your Name"
+                      id="current"
+                      onChange={handleNewName}
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <Label htmlFor="newEmail">Email</Label>
+                    <Input
+                      placeholder="john@example.com"
+                      id="newEmail"
+                      type="email"
+                      onChange={handleNewEmail}
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <Label htmlFor="newPassword">Password</Label>
+                    <Input
+                      placeholder="Enter your Password"
+                      id="newPassword"
+                      type="password"
+                      onChange={handleNewPassword}
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <Label htmlFor="confirmNewPassword">Confirm Password</Label>
+                    {newPassword !== confirmNewPassword && (
+                      <span className="text-lg text-red-950">
+                        {" "}
+                        Password not match
+                      </span>
+                    )}
+
+                    <Input
+                      placeholder="Confirm your Password"
+                      id="confirmNewPassword"
+                      type="password"
+                      onChange={handleConfirmNewPassword}
+                    />
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <Button type="submit">Sign up</Button>
+                </CardFooter>
+              </form>
             </Card>
           </TabsContent>
         </Tabs>

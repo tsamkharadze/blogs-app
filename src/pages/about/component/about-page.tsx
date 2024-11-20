@@ -36,7 +36,9 @@ const About = () => {
       {/* cards */}
 
       <div>
-        <h1>What We Offer</h1>
+        <h1 className="my-12 text-center text-3xl font-semibold">
+          What We Offer
+        </h1>
         <div className="grid gap-6 md:grid-cols-3">
           <Card className="rounded-xl border bg-card text-card-foreground shadow">
             <CardHeader className="pb-4">
@@ -49,9 +51,7 @@ const About = () => {
                   fill="none"
                   stroke="currentColor"
                   stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  className="lucide lucide-book-open mb-2 h-10 w-10 text-primary"
+                  className="mb-2 h-10 w-10"
                 >
                   <path d="M12 7v14"></path>
                   <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path>
@@ -79,12 +79,12 @@ const About = () => {
                   fill="none"
                   stroke="currentColor"
                   stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  className="lucide lucide-book-open mb-2 h-10 w-10 text-primary"
+                  className="mb-2 h-10 w-10"
                 >
-                  <path d="M12 7v14"></path>
-                  <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path>
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                 </svg>
                 <div className="font-semibold leading-none tracking-tight">
                   Rich Content
@@ -109,12 +109,9 @@ const About = () => {
                   fill="none"
                   stroke="currentColor"
                   stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  className="lucide lucide-book-open mb-2 h-10 w-10 text-primary"
+                  className="mb-2 h-10 w-10"
                 >
-                  <path d="M12 7v14"></path>
-                  <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path>
+                  <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>
                 </svg>
                 <div className="font-semibold leading-none tracking-tight">
                   Rich Content
