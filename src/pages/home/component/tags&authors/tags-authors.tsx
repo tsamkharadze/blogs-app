@@ -1,6 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 type Author = {
   name: string;
@@ -33,7 +34,11 @@ const Aside = () => {
         </p>
         <div className="p-4">
           {authors.map((author, index) => (
-            <div key={index} className="flex cursor-pointer gap-4">
+            <Link
+              to={"/author"}
+              key={index}
+              className="flex cursor-pointer gap-4"
+            >
               <Avatar>
                 <AvatarImage src="" />
                 <AvatarFallback></AvatarFallback>
@@ -42,7 +47,7 @@ const Aside = () => {
                 <p className="font-semibold hover:underline">{author.name}</p>
                 <p className="text-sm text-muted-foreground">{author.status}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

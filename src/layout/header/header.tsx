@@ -1,5 +1,5 @@
 import { Button } from "../../components/ui/button";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { ModeToggle } from "@/components/mode-toggle";
 import { ChangeLagunge } from "./lang-switcher";
 import { useTranslation } from "react-i18next";
@@ -11,33 +11,33 @@ const Header = () => {
     <div className="border-b-[1px] bg-white dark:bg-black">
       <div className="ml-auto mr-auto h-16 max-w-screen-md bg-inherit">
         <div className="mx-auto ml-2 mr-2 flex h-full max-w-7xl items-center justify-between">
-          <Link to={"/home"}>
+          <NavLink to={"/home"}>
             <p className="text-2xl font-bold dark:text-white">BitBlogs</p>
-          </Link>
+          </NavLink>
           <div className="flex space-x-4 text-muted-foreground">
-            <Link to={"/home"}>
+            <NavLink to={"/home"}>
               <p className="cursor-pointer hover:text-foreground dark:hover:text-white">
                 {t("header-translation.home")}
               </p>
-            </Link>
-            <Link to={"/write"}>
+            </NavLink>
+            <NavLink to={"/write"}>
               <p className="cursor-pointer hover:text-foreground dark:hover:text-white">
                 {t("header-translation.write")}
               </p>
-            </Link>
-            <Link to={"/about"}>
+            </NavLink>
+            <NavLink to={"/about"}>
               <p className="cursor-pointer hover:text-foreground dark:hover:text-white">
                 {t("header-translation.about")}
               </p>
-            </Link>
+            </NavLink>
           </div>
           <div className="flex items-center gap-5">
             <Search />
-            <Link to={"/auth"}>
+            <NavLink to={"/authorization"}>
               <Button className="bg-primary">
                 {t("header-translation.sign_in")}
               </Button>
-            </Link>
+            </NavLink>
             <ChangeLagunge />
             <ModeToggle />
           </div>

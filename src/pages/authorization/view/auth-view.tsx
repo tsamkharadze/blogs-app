@@ -1,6 +1,6 @@
 import { Authorization } from "../component/register-authorize";
 
-const AuthView = () => {
+const AuthorizationView = () => {
   return (
     <>
       <Authorization />
@@ -8,4 +8,4 @@ const AuthView = () => {
   );
 };
 
-export default AuthView;
+export default AuthorizationView;

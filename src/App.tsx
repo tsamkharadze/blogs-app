@@ -4,9 +4,10 @@ import Homeview from "./pages/home/view/homeview";
 import DefaultLayout from "./layout/default/default-layout";
 import { Suspense } from "react";
 import { ThemeProvider } from "./components/theme-provider";
-import AuthView from "./pages/authorization/view/auth-view";
 import WriteView from "./pages/write/view/write-view";
 import AboutView from "./pages/about/view/about-view";
+import AuthorizationView from "./pages/authorization/view/auth-view";
+import AuthorView from "./pages/author-page/view/author-view";
 
 function App() {
   return (
@@ -26,7 +27,8 @@ function App() {
               <Route path="home" element={<Homeview />} />
               <Route path="write" element={<WriteView />} />
               <Route path="about" element={<AboutView />} />
-              <Route path="auth" element={<AuthView />} />
+              <Route path="authorization" element={<AuthorizationView />} />
+              <Route path="author" element={<AuthorView />} />
             </Route>
           </Routes>
         </BrowserRouter>

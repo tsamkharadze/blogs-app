@@ -1,14 +1,16 @@
+import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Cards from "@/pages/home/component/card/cards";
 
 const Author = () => {
   return (
-    <div className="px-4 py-8">
-      <div className="mb-12 flex flex-col items-center rounded-lg bg-card p-8 shadow-lg md:flex-row md:items-start">
-        <span className="relative mb-4 flex h-32 w-32 shrink-0 overflow-hidden rounded-full border-4 border-primary md:mb-0 md:mr-8">
-          <span className="flex h-full w-full items-center justify-center rounded-full bg-muted">
+    <div className="mx-auto min-h-screen max-w-4xl px-4 py-8">
+      <div className="mb-12 flex rounded-lg bg-card p-8">
+        <div className="relative mb-4 flex h-32 w-32 shrink-0 overflow-hidden rounded-full border-4 border-primary md:mb-0 md:mr-8">
+          <div className="flex h-full w-full items-center justify-center rounded-full bg-muted">
             JD
-          </span>
-        </span>
+          </div>
+        </div>
         <div className="flex-grow text-center md:text-left">
           <h1 className="mb-2 text-3xl font-bold">Jane Doe</h1>
           <p className="mb-4 text-muted-foreground">
@@ -133,15 +135,57 @@ const Author = () => {
         </div>
       </div>
       <div>
-        <Tabs defaultValue="account">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="account">Account</TabsTrigger>
-            <TabsTrigger value="password">Password</TabsTrigger>
+        <Tabs defaultValue="articles">
+          <TabsList className="mb-12 grid w-full grid-cols-2">
+            <TabsTrigger value="articles">Articles</TabsTrigger>
+            <TabsTrigger value="about">About</TabsTrigger>
           </TabsList>
-          <TabsContent value="account">
-            Make changes to your account here.
+          <TabsContent value="articles">
+            <Cards />
           </TabsContent>
-          <TabsContent value="password">Change your password here.</TabsContent>
+          <TabsContent value="about">
+            <div className="rounded-xl border bg-card text-card-foreground shadow">
+              <div className="flex flex-col space-y-1.5 p-6">
+                <div className="font-semibold leading-none tracking-tight">
+                  About Jane Doe
+                </div>
+              </div>
+              <div className="p-6 pt-0">
+                <p className="text-muted-foreground">
+                  Jane Doe is a seasoned software engineer with over a decade of
+                  experience in web development. She specializes in JavaScript,
+                  React, and Node.js, and has a keen interest in emerging
+                  technologies like AI and blockchain. Jane is a frequent
+                  speaker at tech conferences and contributes to various
+                  open-source projects.
+                </p>
+                <h3 className="mb-2 font-semibold">Skills</h3>
+                <div className="flex flex-wrap gap-2">
+                  <Badge className="bg-black hover:bg-black dark:bg-black">
+                    JavaScript
+                  </Badge>
+                  <Badge className="bg-black hover:bg-black dark:bg-black">
+                    React
+                  </Badge>{" "}
+                  <Badge className="bg-black hover:bg-black dark:bg-black">
+                    Node.js
+                  </Badge>{" "}
+                  <Badge className="bg-black hover:bg-black dark:bg-black">
+                    Python
+                  </Badge>{" "}
+                  <Badge className="bg-black hover:bg-black dark:bg-black">
+                    AI
+                  </Badge>{" "}
+                  <Badge className="bg-black hover:bg-black dark:bg-black">
+                    Blockchain
+                  </Badge>{" "}
+                  <Badge className="bg-black hover:bg-black dark:bg-black">
+                    Web development{" "}
+                  </Badge>{" "}
+                </div>
+              </div>
+            </div>
+          </TabsContent>
         </Tabs>
       </div>
     </div>
