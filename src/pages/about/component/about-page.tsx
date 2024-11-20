@@ -1,26 +1,56 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { useTranslation } from "react-i18next";
+interface AboutTranslation {
+  header: {
+    header: string;
+    description: string;
+  };
+  hero: {
+    header: string;
+    description: string;
+  };
+  cardsSection: {
+    sectionHeader: string;
+    cardsHeader: {
+      header: string[];
+    };
+    cardsDescription: string[];
+  };
+  story: {
+    storyHeader: string;
+    storyDescription: string;
+    storySubDescription: string;
+  };
+  join: {
+    joinHeader: string;
+    joinDescription: string;
+    joinButton: string;
+  };
+}
 
 const About = () => {
+  const { t } = useTranslation();
+
+  const about = t("about-translation", {
+    returnObjects: true,
+  }) as AboutTranslation;
+
   return (
     <div className="mx-auto max-w-[896px] px-4 py-8">
       <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold text-white">About bitBlogs</h1>
+        <h1 className="mb-4 text-4xl font-bold text-white">
+          {about.header.header}
+        </h1>
         <p className="text-xl text-muted-foreground">
-          Empowering tech enthusiasts to share knowledge and inspire innovation.
+          {about.header.description}
         </p>
       </div>
 
       <div className="mt-12 flex">
         <div className="m-auto">
-          <h2 className="text-3xl font-semibold">Our Mission</h2>
-          <p className="text-muted-foreground">
-            At bitBlogs, we believe in the power of shared knowledge. Our
-            mission is to create a platform where tech enthusiasts, developers,
-            and innovators can come together to share ideas, learn from each
-            other, and push the boundaries of what's possible in the world of
-            technology.
-          </p>
+          <h2 className="text-3xl font-semibold">{about.hero.header}</h2>
+          <p className="text-muted-foreground">{about.hero.description}</p>
         </div>
 
         <div className="">
@@ -37,7 +67,7 @@ const About = () => {
 
       <div>
         <h1 className="my-12 text-center text-3xl font-semibold">
-          What We Offer
+          {about.cardsSection.sectionHeader}
         </h1>
         <div className="grid gap-6 md:grid-cols-3">
           <Card className="rounded-xl border bg-card text-card-foreground shadow">
@@ -50,21 +80,20 @@ const About = () => {
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="2"
+                  strokeWidth="2"
                   className="mb-2 h-10 w-10"
                 >
                   <path d="M12 7v14"></path>
                   <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path>
                 </svg>
                 <div className="font-semibold leading-none tracking-tight">
-                  Rich Content
+                  {about.cardsSection.cardsHeader.header[0]}
                 </div>
               </div>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground">
-                Access a wide range of articles, tutorials, and insights on the
-                latest tech trends and best practices.
+                {about.cardsSection.cardsDescription[0]}
               </p>
             </CardContent>
           </Card>
@@ -78,7 +107,7 @@ const About = () => {
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="2"
+                  strokeWidth="2"
                   className="mb-2 h-10 w-10"
                 >
                   <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
@@ -87,14 +116,13 @@ const About = () => {
                   <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                 </svg>
                 <div className="font-semibold leading-none tracking-tight">
-                  Rich Content
+                  {about.cardsSection.cardsHeader.header[1]}
                 </div>
               </div>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground">
-                Access a wide range of articles, tutorials, and insights on the
-                latest tech trends and best practices.
+                {about.cardsSection.cardsDescription[1]}
               </p>
             </CardContent>
           </Card>
@@ -108,20 +136,19 @@ const About = () => {
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="2"
+                  strokeWidth="2"
                   className="mb-2 h-10 w-10"
                 >
                   <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>
                 </svg>
                 <div className="font-semibold leading-none tracking-tight">
-                  Rich Content
+                  {about.cardsSection.cardsHeader.header[2]}
                 </div>
               </div>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground">
-                Access a wide range of articles, tutorials, and insights on the
-                latest tech trends and best practices.
+                {about.cardsSection.cardsDescription[2]}
               </p>
             </CardContent>
           </Card>
@@ -131,32 +158,26 @@ const About = () => {
       {/* our story */}
 
       <div className="mt-12 rounded-lg bg-muted p-8">
-        <h2 className="mb-4 text-3xl font-semibold">Our Story</h2>
+        <h2 className="mb-4 text-3xl font-semibold">
+          {about.story.storyHeader}
+        </h2>
         <p className="mb-4 text-muted-foreground">
-          Founded in 2023, bitBlogs started as a small project by a group of
-          passionate developers who wanted to create a space for sharing their
-          experiences and learning from others. What began as a simple blog
-          quickly grew into a thriving community of tech enthusiasts from all
-          around the world.
+          {about.story.storyDescription}
         </p>
         <p className="text-muted-foreground">
-          Today, bitBlogs is proud to be a leading platform for
-          technology-focused content, fostering innovation and collaboration in
-          the ever-evolving world of tech.
+          {about.story.storySubDescription}
         </p>
       </div>
 
       {/* join us */}
 
       <section className="mt-12 text-center">
-        <h2 className="mb-4 text-3xl font-semibold">Join Us on Our Journey</h2>
+        <h2 className="mb-4 text-3xl font-semibold">{about.join.joinHeader}</h2>
         <p className="mb-6 text-muted-foreground">
-          Whether you're a seasoned developer, a curious beginner, or somewhere
-          in between, there's a place for you at bitBlogs. Let's shape the
-          future of technology together.
+          {about.join.joinDescription}
         </p>
 
-        <Button>Get Started Today</Button>
+        <Button>{about.join.joinButton}</Button>
       </section>
     </div>
   );

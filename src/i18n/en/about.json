@@ -1,0 +1,32 @@
+{
+  "header": {
+    "header": "About bitblogs",
+    "description": "Empowering tech enthusiasts to share knowledge and inspire innovation."
+  },
+
+  "hero": {
+    "header": "Our Mission",
+    "description": "At bitBlogs, we believe in the power of shared knowledge. Our mission is to create a platform where tech enthusiasts, developers, and innovators can come together to share ideas, learn from each other, and push the boundaries of what's possible in the world of technology."
+  },
+  "cardsSection": {
+    "sectionHeader": "What We Offer",
+    "cardsHeader": {
+      "header": ["Rich Content", "Vibrant Community", "Cutting-edge Topics"]
+    },
+    "cardsDescription": [
+      "Access a wide range of articles, tutorials, and insights on the latest tech trends and best practices.",
+      "Connect with like-minded individuals, share your knowledge, and grow your professional network.",
+      "Stay ahead of the curve with content covering emerging technologies and innovative solutions."
+    ]
+  },
+  "story": {
+    "storyHeader": "Our Story",
+    "storyDescription": "Founded in 2023, bitBlogs started as a small project by a group of passionate developers who wanted to create a space for sharing their experiences and learning from others. What began as a simple blog quickly grew into a thriving community of tech enthusiasts from all around the world.",
+    "story-subdescription": "Today, bitBlogs is proud to be a leading platform for technology-focused content, fostering innovation and collaboration in the ever-evolving world of tech."
+  },
+  "join": {
+    "joinHeader": "Join Us on Our Journey",
+    "joinDescription": "Whether you're a seasoned developer, a curious beginner, or somewhere in between, there's a place for you at bitBlogs. Let's shape the future of technology together.",
+    "joinButton": "Get Started Today"
+  }
+}

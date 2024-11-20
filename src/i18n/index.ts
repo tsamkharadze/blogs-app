@@ -9,6 +9,8 @@ import tagsEn from "./en/tags.json";
 import tagsKa from "./ka/tags.json";
 import authorsEn from "./en/authors.json";
 import authorsKa from "./ka/authors.json";
+import aboutEn from "./en/about.json";
+import aboutKa from "./ka/about.json";
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -20,6 +22,7 @@ i18n
           "card-translation": cardKa,
           "tags-translation": tagsKa,
           "authors-translation": authorsKa,
+          "about-translation": aboutKa,
         },
       },
       en: {
@@ -28,6 +31,7 @@ i18n
           "card-translation": cardEn,
           "tags-translation": tagsEn,
           "authors-translation": authorsEn,
+          "about-translation": aboutEn,
         },
       },
     },

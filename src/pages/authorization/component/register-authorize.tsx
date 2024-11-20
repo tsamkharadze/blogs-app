@@ -130,6 +130,7 @@ export function Authorization() {
                       id="name"
                       placeholder="john@example.com"
                       onChange={handleEmail}
+                      autoComplete="username"
                     />
                   </div>
                   <div className="space-y-1">
@@ -139,6 +140,7 @@ export function Authorization() {
                       type="password"
                       placeholder="Enter your Password"
                       onChange={handlePassword}
+                      autoComplete="current-password"
                     />
                   </div>
                 </CardContent>
@@ -173,6 +175,7 @@ export function Authorization() {
                       id="newEmail"
                       type="email"
                       onChange={handleNewEmail}
+                      autoComplete="username"
                     />
                   </div>
                   <div className="space-y-1">
@@ -182,13 +185,13 @@ export function Authorization() {
                       id="newPassword"
                       type="password"
                       onChange={handleNewPassword}
+                      autoComplete="new-password"
                     />
                   </div>
                   <div className="space-y-1">
                     <Label htmlFor="confirmNewPassword">Confirm Password</Label>
                     {newPassword !== confirmNewPassword && (
                       <span className="text-lg text-red-950">
-                        {" "}
                         Password not match
                       </span>
                     )}
@@ -198,6 +201,7 @@ export function Authorization() {
                       id="confirmNewPassword"
                       type="password"
                       onChange={handleConfirmNewPassword}
+                      autoComplete="confirm-password"
                     />
                   </div>
                 </CardContent>
