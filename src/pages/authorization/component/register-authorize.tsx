@@ -13,9 +13,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { login, register } from "@/supabase/auth";
 import { useMutation } from "@tanstack/react-query";
 import { ChangeEvent, FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function Authorization() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // ლოგინის სთეითები
   const [email, setEmail] = useState("");
@@ -32,6 +33,9 @@ export function Authorization() {
   const { mutate: handleLogin } = useMutation({
     mutationKey: ["login"],
     mutationFn: login,
+    onSuccess: () => {
+      navigate("/home");
+    },
   });
 
   const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {

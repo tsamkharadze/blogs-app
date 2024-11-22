@@ -17,5 +17,15 @@ export const login = ({
   email: string;
   password: string;
 }) => {
-  return supabase.auth.signInWithPassword({ email, password });
+  return supabase.auth
+    .signInWithPassword({ email, password })
+    .then((response) => {
+      if (response.error) {
+        throw response?.error;
+      }
+      return response;
+    });
+};
+export const logout = () => {
+  return supabase.auth.signOut();
 };

@@ -1,11 +1,32 @@
 import { Button } from "../../components/ui/button";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { ModeToggle } from "@/components/mode-toggle";
 import { ChangeLagunge } from "./lang-switcher";
 import { useTranslation } from "react-i18next";
 import Search from "./search";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useAtomValue } from "jotai";
+import { userAtom } from "@/store/auth";
+import { useMutation } from "@tanstack/react-query";
+import { logout } from "@/supabase/auth";
 
 const Header = () => {
+  const user = useAtomValue(userAtom);
+  console.log(user?.user.id);
+
+  const { mutate: handleLogout } = useMutation({
+    mutationKey: ["logout"],
+    mutationFn: logout,
+  });
+
   const { t } = useTranslation();
   return (
     <div className="border-b-[1px] bg-white dark:bg-black">
@@ -38,6 +59,30 @@ const Header = () => {
                 {t("header-translation.sign_in")}
               </Button>
             </NavLink>
+
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                {" "}
+                <Avatar>
+                  <AvatarImage
+                  //  src="https://github.com/shadcn.png" აქ უნდა ჩავსვა არჩეული ავატარი.
+                  />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <Link to={"/profile"}>
+                  <DropdownMenuItem>Edit Profile</DropdownMenuItem>
+                </Link>
+                <DropdownMenuItem>Help and support </DropdownMenuItem>
+                <DropdownMenuItem>Give Feedback</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleLogout()}>
+                  Logout
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
             <ChangeLagunge />
             <ModeToggle />
           </div>

@@ -1,10 +1,5 @@
 import Aside from "../component/tags&authors/tags-authors";
 import Cards from "../component/card/cards";
-import AvatarComp from "../component/avatar";
-
-const handleAvatarSelect = (avatarSvg: string) => {
-  console.log("Selected Avatar:", avatarSvg);
-};
 
 const Homeview = () => {
   return (
@@ -14,7 +9,6 @@ const Homeview = () => {
       </div>
       <div className="basis-1/3 pl-2">
         <Aside />
-        <AvatarComp onAvatarSelect={handleAvatarSelect} />
       </div>
     </div>
   );
