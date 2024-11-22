@@ -17,17 +17,28 @@ import { useAtomValue } from "jotai";
 import { userAtom } from "@/store/auth";
 import { useMutation } from "@tanstack/react-query";
 import { logout } from "@/supabase/auth";
+import { useEffect, useState } from "react";
+import { getProfileInfo } from "@/supabase/account";
 
 const Header = () => {
-  const user = useAtomValue(userAtom);
-  console.log(user?.user.id);
+  const { t } = useTranslation();
+  // eslint-disable-next-line
+  const [userData, setUserData] = useState<any>({});
 
+  const user = useAtomValue(userAtom);
   const { mutate: handleLogout } = useMutation({
     mutationKey: ["logout"],
     mutationFn: logout,
   });
 
-  const { t } = useTranslation();
+  useEffect(() => {
+    if (user) {
+      getProfileInfo(user.user.id).then((response) =>
+        setUserData(response.data?.[0]),
+      );
+    }
+  }, [user]);
+
   return (
     <div className="border-b-[1px] bg-white dark:bg-black">
       <div className="ml-auto mr-auto h-16 max-w-screen-md bg-inherit">
@@ -54,35 +65,45 @@ const Header = () => {
           </div>
           <div className="flex items-center gap-5">
             <Search />
-            <NavLink to={"/authorization"}>
-              <Button className="bg-primary">
-                {t("header-translation.sign_in")}
-              </Button>
-            </NavLink>
 
-            <DropdownMenu>
-              <DropdownMenuTrigger>
-                {" "}
-                <Avatar>
-                  <AvatarImage
-                  //  src="https://github.com/shadcn.png" აქ უნდა ჩავსვა არჩეული ავატარი.
-                  />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <Link to={"/profile"}>
-                  <DropdownMenuItem>Edit Profile</DropdownMenuItem>
-                </Link>
-                <DropdownMenuItem>Help and support </DropdownMenuItem>
-                <DropdownMenuItem>Give Feedback</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleLogout()}>
-                  Logout
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            {!user ? (
+              <NavLink to={"/authorization"}>
+                <Button className="bg-primary">
+                  {t("header-translation.sign_in")}
+                </Button>
+              </NavLink>
+            ) : (
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  {" "}
+                  <Avatar>
+                    {userData.avatar_url ? (
+                      <div
+                        className="aspect-square w-full"
+                        dangerouslySetInnerHTML={{
+                          __html: userData.avatar_url,
+                        }}
+                      />
+                    ) : (
+                      <AvatarImage />
+                    )}
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <Link to={"/profile"}>
+                    <DropdownMenuItem>Edit Profile</DropdownMenuItem>
+                  </Link>
+                  <DropdownMenuItem>Help and support </DropdownMenuItem>
+                  <DropdownMenuItem>Give Feedback</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleLogout()}>
+                    Log out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
             <ChangeLagunge />
             <ModeToggle />
           </div>
