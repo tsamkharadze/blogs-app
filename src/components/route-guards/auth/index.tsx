@@ -13,13 +13,3 @@ export const AuthGuard: React.FC<PropsWithChildren> = ({ children }) => {
 
   return children || <Outlet />;
 };
-
-export const LogoutGuard: React.FC<PropsWithChildren> = ({ children }) => {
-  const [user] = useAtom(userAtom);
-
-  if (!user) {
-    return <Navigate to="/home" />;
-  }
-
-  return children || <Outlet />;
-};

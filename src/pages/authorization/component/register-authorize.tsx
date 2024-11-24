@@ -98,15 +98,6 @@ export function Authorization() {
     }
   };
 
-  // // Handle tab change to update URL
-  // const handleTabChange = (value: string) => {
-  //   if (value === "LogIn") {
-  //     navigate("/authorization/signIn");
-  //   } else if (value === "register") {
-  //     navigate("/authorization/register");
-  //   }
-  // };
-
   return (
     <div className="flex h-[500px] min-h-screen items-center justify-center">
       <div className="h-[500px]">

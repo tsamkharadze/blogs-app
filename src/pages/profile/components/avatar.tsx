@@ -1,27 +1,46 @@
 import { createAvatar } from "@dicebear/core";
 import { avataaars } from "@dicebear/collection";
 import { useEffect, useState } from "react";
+import { useAtomValue } from "jotai";
+import { avatarAtom } from "@/store/auth";
 
 const AvatarComp = ({
   onAvatarSelect,
 }: {
   onAvatarSelect: (avatarSvg: string) => void;
 }) => {
-  // List of avatar configurations
+  const actualAvatar = useAtomValue(avatarAtom);
+
+  // ავატარებია
   const avatarConfigs = [
-    { seed: "John Doe", clothesColor: ["3c4f5c", "65c9ff"] },
-    { seed: "Jane Smith", clothesColor: ["ecadff", "fc909f"] },
-    { seed: "Alex Johnson", clothesColor: ["b1e2ff", "f4d150"] },
-    { seed: "Emma Brown", clothesColor: ["f9c9b6", "ac6651"] },
+    { seed: "John Tsaavaa", clothesColor: ["3c4f5c", "65c9ff"] },
+    { seed: "Tornike samkharadze", clothesColor: ["ecadff", "fc909f"] },
+    { seed: "Nika phartsvania", clothesColor: ["f9c9b6", "ac6651"] },
+    { seed: "Luka badali", clothesColor: ["b1e2ff", "f4d150"] },
+    { seed: "Zaza Gordeziani", clothesColor: ["ffc6a5", "8e44ad"] },
+    { seed: "sopiko imnaishvili", clothesColor: ["48dbfb", "10ac84"] },
+    { seed: "Ana zhuzhunashvili", clothesColor: ["576574", "ee5253"] },
+    { seed: "teona2 omiadze", clothesColor: ["feca57", "1dd1a1"] },
   ];
 
-  // State to track the selected avatar
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
-  // Generate SVGs for all avatars
+  // ავატარების დაგენერირება
   const avatars = avatarConfigs.map((config) =>
     createAvatar(avataaars, config).toString(),
   );
+
+  // ჩემი სერვერიდან მიღებული ავატარის ინდექსის განსაზღვრა
+  const actualIndex = actualAvatar ? avatars.indexOf(actualAvatar) : -1;
+
+  // ჩასეტვა ინდექსში დიფოლტ ველიუდ, რომ ჩემი ავატარი იყოს ირგვლივ გაფერადებული
+  const [selectedIndex, setSelectedIndex] = useState<number>(
+    actualIndex !== -1 ? actualIndex : 0,
+  );
+
+  useEffect(() => {
+    if (actualIndex !== -1) {
+      setSelectedIndex(actualIndex);
+    }
+  }, [actualIndex]);
 
   useEffect(() => {
     onAvatarSelect(avatars[selectedIndex]);
@@ -55,7 +74,9 @@ const AvatarComp = ({
       </h3>
       <div
         className="mx-auto mt-4 h-32 w-32 rounded-lg border border-blue-500 p-4"
-        dangerouslySetInnerHTML={{ __html: avatars[selectedIndex] }}
+        dangerouslySetInnerHTML={{
+          __html: avatars[selectedIndex],
+        }}
       />
     </div>
   );

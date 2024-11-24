@@ -9,13 +9,16 @@ import AboutView from "./pages/about/view/about-view";
 import AuthorizationView from "./pages/authorization/view/auth-view";
 import AuthorView from "./pages/author-page/view/author-view";
 import ProfileView from "./pages/profile/view/profile-view";
-import { useSetAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import { supabase } from "./supabase";
-import { userAtom } from "./store/auth";
-import { AuthGuard, LogoutGuard } from "./components/route-guards/auth";
+import { avatarAtom, userAtom } from "./store/auth";
+import { AuthGuard } from "./components/route-guards/auth";
+import { getProfileInfo } from "./supabase/account";
+import { LogoutGuard } from "./components/route-guards/logout";
 
 function App() {
-  const setUser = useSetAtom(userAtom);
+  const [user, setUser] = useAtom(userAtom);
+  const setUserAvatar = useSetAtom(avatarAtom);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -30,6 +33,13 @@ function App() {
 
     return () => subscription.unsubscribe();
   }, [setUser]);
+
+  useEffect(() => {
+    if (user)
+      getProfileInfo(user.user.id).then((res) =>
+        setUserAvatar(res.data?.[0]?.avatar_url || ""),
+      );
+  });
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">

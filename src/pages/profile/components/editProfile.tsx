@@ -10,19 +10,20 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import AvatarComp from "@/pages/profile/components/avatar";
-import { userAtom } from "@/store/auth";
+import { avatarAtom, userAtom } from "@/store/auth";
 import { fillProfileInfo, getProfileInfo } from "@/supabase/account";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
 const Profile = () => {
-  const [nameEn, setNameEn] = useState("");
-  const [nameKa, setNameKa] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [avatar, setAvatar] = useState("");
+  const [full_name_en, setNameEn] = useState("");
+  const [full_name_ka, setNameKa] = useState("");
+  const [phone_number, setPhoneNumber] = useState("");
+  const [avatar_url, setAvatar] = useState("");
   // const [userData, setUserData] = useState({});
   const user = useAtomValue(userAtom);
+  const setAtomAvatar = useSetAtom(avatarAtom);
   const userId = user?.user?.id;
 
   // Fetch profile data
@@ -60,31 +61,26 @@ const Profile = () => {
 
   const { mutate: updateProfile } = useMutation({
     mutationFn: fillProfileInfo,
-    // onSuccess:()=>{refetch()}
+    onSuccess: () => {
+      refetch();
+    },
   });
 
   const handleUpdateInfo = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const isNameKaFilled = !!nameKa;
-    const isNameEnFilled = !!nameEn;
-    const isPhoneNumberFilled = !!phoneNumber;
+    const isNameKaFilled = !!full_name_ka;
+    const isNameEnFilled = !!full_name_en;
+    const isPhoneNumberFilled = !!phone_number;
 
     if (isNameKaFilled && isNameEnFilled && isPhoneNumberFilled) {
-      // fillProfileInfo({
-      //   id: user.user.id,
-      //   name_Ka: nameKa,
-      //   Name_En: nameEn,
-      //   phone_Number: phoneNumber,
-      //   avatar_url: avatar,
-      // });
       updateProfile({
         id: userId,
-        name_Ka: nameKa,
-        Name_En: nameEn,
-        phone_Number: phoneNumber,
-        avatar_url: avatar,
+        full_name_ka,
+        full_name_en,
+        avatar_url,
+        phone_number,
       });
-      refetch();
+      setAtomAvatar(avatar_url);
     }
   };
 
@@ -104,7 +100,7 @@ const Profile = () => {
                 id="nameEn"
                 placeholder="Enter your name"
                 onChange={handleNameEn}
-                value={nameEn}
+                value={full_name_en}
                 autoComplete="username"
               />
             </div>
@@ -115,7 +111,7 @@ const Profile = () => {
                 id="nameKa"
                 placeholder="შეიყვანეთ თქვენი სახელი"
                 onChange={handleNameKa}
-                value={nameKa}
+                value={full_name_ka}
                 autoComplete="username"
               />
             </div>
@@ -126,7 +122,7 @@ const Profile = () => {
                 id="honeNumber"
                 placeholder="Enter your phone number"
                 onChange={handlePhoneNumber}
-                value={phoneNumber}
+                value={phone_number}
                 autoComplete="username"
               />
             </div>
