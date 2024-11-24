@@ -15,15 +15,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useAtomValue } from "jotai";
 import { userAtom } from "@/store/auth";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { logout } from "@/supabase/auth";
-import { useEffect, useState } from "react";
 import { getProfileInfo } from "@/supabase/account";
 
 const Header = () => {
   const { t } = useTranslation();
-  // eslint-disable-next-line
-  const [userData, setUserData] = useState<any>({});
 
   const user = useAtomValue(userAtom);
   const { mutate: handleLogout } = useMutation({
@@ -31,13 +28,15 @@ const Header = () => {
     mutationFn: logout,
   });
 
-  useEffect(() => {
-    if (user) {
-      getProfileInfo(user.user.id).then((response) =>
-        setUserData(response.data?.[0]),
-      );
-    }
-  }, [user]);
+  const {
+    data: userData,
+    // error,
+    // isLoading,
+  } = useQuery({
+    queryKey: ["userData"],
+    queryFn: () => getProfileInfo(user.user.id),
+    select: (data) => data?.data?.[0],
+  });
 
   return (
     <div className="border-b-[1px] bg-white dark:bg-black">
@@ -77,11 +76,11 @@ const Header = () => {
                 <DropdownMenuTrigger>
                   {" "}
                   <Avatar>
-                    {userData.avatar_url ? (
+                    {userData?.avatar_url ? (
                       <div
                         className="aspect-square w-full"
                         dangerouslySetInnerHTML={{
-                          __html: userData.avatar_url,
+                          __html: userData?.avatar_url,
                         }}
                       />
                     ) : (

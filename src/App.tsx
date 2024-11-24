@@ -12,7 +12,7 @@ import ProfileView from "./pages/profile/view/profile-view";
 import { useSetAtom } from "jotai";
 import { supabase } from "./supabase";
 import { userAtom } from "./store/auth";
-import AuthGuard from "./components/route-guards/auth";
+import { AuthGuard, LogoutGuard } from "./components/route-guards/auth";
 
 function App() {
   const setUser = useSetAtom(userAtom);
@@ -57,7 +57,14 @@ function App() {
                 }
               />
               <Route path="author" element={<AuthorView />} />{" "}
-              <Route path="profile" element={<ProfileView />} />
+              <Route
+                path="profile"
+                element={
+                  <LogoutGuard>
+                    <ProfileView />
+                  </LogoutGuard>
+                }
+              />
             </Route>
           </Routes>
         </BrowserRouter>

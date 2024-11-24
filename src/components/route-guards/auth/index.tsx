@@ -4,7 +4,7 @@ import React from "react";
 import { PropsWithChildren } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
-const AuthGuard: React.FC<PropsWithChildren> = ({ children }) => {
+export const AuthGuard: React.FC<PropsWithChildren> = ({ children }) => {
   const [user] = useAtom(userAtom);
 
   if (user) {
@@ -14,4 +14,12 @@ const AuthGuard: React.FC<PropsWithChildren> = ({ children }) => {
   return children || <Outlet />;
 };
 
-export default AuthGuard;
+export const LogoutGuard: React.FC<PropsWithChildren> = ({ children }) => {
+  const [user] = useAtom(userAtom);
+
+  if (!user) {
+    return <Navigate to="/home" />;
+  }
+
+  return children || <Outlet />;
+};

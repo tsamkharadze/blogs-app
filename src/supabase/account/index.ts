@@ -22,6 +22,6 @@ export const fillProfileInfo = async ({
   });
 };
 
-export const getProfileInfo = (id: string | number) => {
-  return supabase.from("profiles").select("*").eq("id", id);
+export const getProfileInfo = async (id: string | number) => {
+  return await supabase.from("profiles").select("*").eq("id", id);
 };

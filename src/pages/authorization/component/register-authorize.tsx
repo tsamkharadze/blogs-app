@@ -11,12 +11,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { login, register } from "@/supabase/auth";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export function Authorization() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   // ლოგინის სთეითები
   const [email, setEmail] = useState("");
@@ -34,6 +35,7 @@ export function Authorization() {
     mutationKey: ["login"],
     mutationFn: login,
     onSuccess: () => {
+      queryClient.invalidateQueries();
       navigate("/home");
     },
   });
