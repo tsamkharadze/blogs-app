@@ -26,10 +26,10 @@ const Profile = () => {
   const setAtomAvatar = useSetAtom(avatarAtom);
   const userId = user?.user?.id;
 
-  // Fetch profile data
+  // Fetch profile
   const { data: userProfile, refetch } = useQuery({
     queryKey: ["profileInfo", userId],
-    queryFn: () => getProfileInfo(userId),
+    queryFn: () => getProfileInfo(userId!),
     enabled: !!userId,
     select: (data) => data?.data?.[0],
   });
@@ -74,7 +74,7 @@ const Profile = () => {
 
     if (isNameKaFilled && isNameEnFilled && isPhoneNumberFilled) {
       updateProfile({
-        id: userId,
+        id: userId ?? "",
         full_name_ka,
         full_name_en,
         avatar_url,

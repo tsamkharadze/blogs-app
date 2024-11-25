@@ -1,5 +1,5 @@
 import { atom } from "jotai";
+import { Session } from "@supabase/supabase-js";
 
-//eslint-disable-next-line
-export const userAtom = atom<any>(null);
+export const userAtom = atom<Session | null>(null);
 export const avatarAtom = atom<string | null>(null);
