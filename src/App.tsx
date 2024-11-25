@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Homeview from "./pages/home/view/homeview";
 import DefaultLayout from "./layout/default/default-layout";
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { ThemeProvider } from "./components/theme-provider";
 import WriteView from "./pages/write/view/write-view";
 import AboutView from "./pages/about/view/about-view";
@@ -18,11 +18,13 @@ import { LogoutGuard } from "./components/route-guards/logout";
 
 function App() {
   const [user, setUser] = useAtom(userAtom);
+  const [isLoading, setIsloading] = useState(true);
   const setUserAvatar = useSetAtom(avatarAtom);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session);
+      setIsloading(false);
     });
 
     const {
@@ -40,6 +42,10 @@ function App() {
         setUserAvatar(res.data?.[0]?.avatar_url || ""),
       );
   });
+
+  if (isLoading) {
+    return <div>loading</div>;
+  }
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
