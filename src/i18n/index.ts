@@ -11,6 +11,10 @@ import authorsEn from "./en/authors.json";
 import authorsKa from "./ka/authors.json";
 import aboutEn from "./en/about.json";
 import aboutKa from "./ka/about.json";
+import ErrorEn from "./en/errors.json";
+import ErrorKa from "./ka/errors.json";
+import authorizationKa from "./ka/authorization.json";
+import authorizationEn from "./en/authorization.json";
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -23,6 +27,8 @@ i18n
           "tags-translation": tagsKa,
           "authors-translation": authorsKa,
           "about-translation": aboutKa,
+          "error-translation": ErrorKa,
+          "authorization-translation": authorizationKa,
         },
       },
       en: {
@@ -32,6 +38,8 @@ i18n
           "tags-translation": tagsEn,
           "authors-translation": authorsEn,
           "about-translation": aboutEn,
+          "error-translation": ErrorEn,
+          "authorization-translation": authorizationEn,
         },
       },
     },

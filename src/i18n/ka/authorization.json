@@ -1,0 +1,28 @@
+{
+  "tabs": {
+    "logIn": "შესვლა",
+    "register": "რეგისტრაცია"
+  },
+  "card": {
+    "loginTitle": "შესვლა BitBlogs-ში",
+    "loginDescription": "შეიყვანეთ თქვენი მონაცემები ანგარიშზე შესასვლელად",
+    "registerTitle": "რეგისტრაცია BitBlogs-ისთვის",
+    "registerDescription": "შექმენით თქვენი ანგარიში ბლოგინგის დასაწყებად"
+  },
+  "form": {
+    "name": "სახელი",
+    "email": "ელ. ფოსტა",
+    "password": "პაროლი",
+    "confirmPassword": "დაადასტურეთ პაროლი",
+    "placeholders": {
+      "name": "თქვენი სახელი",
+      "email": "john@example.com",
+      "password": "შეიყვანეთ თქვენი პაროლი",
+      "confirmPassword": "დაადასტურეთ თქვენი პაროლი"
+    },
+    "buttons": {
+      "logIn": "შესვლა",
+      "signUp": "რეგისტრაცია"
+    }
+  }
+}
