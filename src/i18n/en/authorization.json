@@ -1,0 +1,28 @@
+{
+  "tabs": {
+    "logIn": "Log in",
+    "register": "Register"
+  },
+  "card": {
+    "loginTitle": "Log in to BitBlogs",
+    "loginDescription": "Enter your credentials to access your account",
+    "registerTitle": "Sign Up for BitBlogs",
+    "registerDescription": "Create your account to start blogging"
+  },
+  "form": {
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "placeholders": {
+      "name": "Your Name",
+      "email": "john@example.com",
+      "password": "Enter your Password",
+      "confirmPassword": "Confirm your Password"
+    },
+    "buttons": {
+      "logIn": "Log in",
+      "signUp": "Sign up"
+    }
+  }
+}
