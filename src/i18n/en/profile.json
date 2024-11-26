@@ -1,0 +1,19 @@
+{
+  "profile": {
+    "title": "Edit profile info",
+    "description": "Please fill all fields",
+    "fields": {
+      "nameEn": "Name English",
+      "nameKa": "Name Georgian",
+      "phoneNumber": "Phone number",
+      "nameEnPlaceholder": "Enter your name english",
+      "nameKaPlaceholder": "Enter your name georgian",
+      "phoneNumberPlaceholder": "Enter your phone number"
+    },
+
+    "buttons": {
+      "confirm": "Confirm"
+    },
+    "loading": "Loading"
+  }
+}

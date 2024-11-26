@@ -5,5 +5,7 @@
   "maxPassword": "Password cannot exceed 15 characters",
   "passwordRequired": "Password is required",
   "passwordConfirmRequired": "Password confirmation is required",
-  "passwordNotMatch": "Passwords do not match"
+  "passwordNotMatch": "Passwords do not match",
+  "mandatory": "Required",
+  "minPhoneLength": "Min 9 symbol"
 }

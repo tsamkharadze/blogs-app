@@ -15,6 +15,8 @@ import ErrorEn from "./en/errors.json";
 import ErrorKa from "./ka/errors.json";
 import authorizationKa from "./ka/authorization.json";
 import authorizationEn from "./en/authorization.json";
+import profileKa from "./ka/profile.json";
+import profileEn from "./en/profile.json";
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -29,6 +31,7 @@ i18n
           "about-translation": aboutKa,
           "error-translation": ErrorKa,
           "authorization-translation": authorizationKa,
+          "profile-translation": profileKa,
         },
       },
       en: {
@@ -40,6 +43,7 @@ i18n
           "about-translation": aboutEn,
           "error-translation": ErrorEn,
           "authorization-translation": authorizationEn,
+          "profile-translation": profileEn,
         },
       },
     },

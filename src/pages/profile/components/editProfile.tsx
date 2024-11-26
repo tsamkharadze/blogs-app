@@ -16,6 +16,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useAtomValue, useSetAtom } from "jotai";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 type fieldInputs = {
   full_name_en: string;
@@ -28,6 +29,7 @@ const Profile = () => {
   const user = useAtomValue(userAtom);
   const setAtomAvatar = useSetAtom(avatarAtom);
   const userId = user?.user?.id;
+  const { t } = useTranslation();
 
   const { register, handleSubmit, formState } = useForm<fieldInputs>();
 
@@ -71,48 +73,81 @@ const Profile = () => {
     <div className="flex h-[500px] min-h-min items-center justify-center">
       <Card className="my-3">
         <CardHeader>
-          <CardTitle>Edit profile info</CardTitle>
-          <CardDescription>Please fill all fields </CardDescription>
+          <CardTitle>{t("profile-translation.profile.title")}</CardTitle>
+          <CardDescription>
+            {t("profile-translation.profile.description")}
+          </CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
           <CardContent>
             <div className="space-y-1">
-              <Label htmlFor="nameEn">Name English</Label>
+              <Label htmlFor="nameEn">
+                {t("profile-translation.profile.fields.nameEn")}
+              </Label>
+              {formState.errors.full_name_en ? (
+                <div className="text-red-500">
+                  {formState.errors.full_name_en.message}
+                </div>
+              ) : (
+                ""
+              )}
               <Input
                 type="text"
-                placeholder="Enter your name"
+                placeholder={t(
+                  "profile-translation.profile.fields.nameEnPlaceholder",
+                )}
                 {...register("full_name_en", {
-                  required: true,
+                  required: t("error-translation.mandatory"),
                   value: userProfile?.full_name_en || "",
                 })}
               />
             </div>
             <div className="space-y-1">
-              <Label htmlFor="nameKa">Name Georgian</Label>
+              <Label htmlFor="nameKa">
+                {t("profile-translation.profile.fields.nameKa")}
+              </Label>
+              {formState.errors.full_name_ka ? (
+                <div className="text-red-500">
+                  {formState.errors.full_name_ka.message}
+                </div>
+              ) : (
+                ""
+              )}
               <Input
                 type="text"
-                placeholder="შეიყვანეთ თქვენი სახელი"
+                placeholder={t(
+                  "profile-translation.profile.fields.nameKaPlaceholder",
+                )}
                 {...register("full_name_ka", {
-                  required: true,
+                  required: t("error-translation.mandatory"),
                   value: userProfile?.full_name_ka || "",
                 })}
               />
             </div>
             <div className="space-y-1">
-              <Label htmlFor="phoneNumber">Phone number</Label>
+              <Label htmlFor="phoneNumber">
+                {t("profile-translation.profile.fields.phoneNumber")}
+              </Label>
               {formState.errors.phone_number ? (
-                <div className="text-red-300">Min 9 number </div>
+                <div className="text-red-500">
+                  {formState.errors.phone_number.message}
+                </div>
               ) : (
                 ""
               )}
               <Input
                 type="number"
                 autoComplete="username"
-                placeholder="Enter your phone number"
+                placeholder={t(
+                  "profile-translation.profile.fields.phoneNumberPlaceholder",
+                )}
                 {...register("phone_number", {
-                  required: true,
+                  required: t("error-translation.mandatory"),
                   value: userProfile?.phone_number || "",
-                  minLength: 9,
+                  minLength: {
+                    value: 9,
+                    message: t("error-translation.minPhoneLength"),
+                  },
                 })}
               />
             </div>

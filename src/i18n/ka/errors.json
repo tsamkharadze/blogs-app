@@ -5,5 +5,7 @@
   "maxPassword": "პაროლი არ უნდა აღემატებოდეს 15 სიმბოლოს",
   "passwordRequired": "პაროლი აუცილებელია",
   "passwordConfirmRequired": "პაროლის დადასტურება აუცილებელია",
-  "passwordNotMatch": "პაროლები არ ემთხვევა"
+  "passwordNotMatch": "პაროლები არ ემთხვევა",
+  "mandatory": "შევსება აუცილებელია",
+  "minPhoneLength": "მინიმუმ 9 სიმბოლო"
 }
