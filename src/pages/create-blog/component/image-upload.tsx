@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -36,6 +35,7 @@ export const ImageUpload = ({
 
   const handleRemoveImage = () => {
     setPreview(null);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     setValue("file", undefined as any);
   };
 
@@ -66,21 +66,6 @@ export const ImageUpload = ({
           accept="image/*"
           {...register("file", {
             required: "Image is required",
-            validate: {
-              fileSize: (files) => {
-                if (!files?.[0]) return true;
-                return (
-                  files[0].size <= 5000000 || "File size must be less than 5MB"
-                );
-              },
-              fileType: (files) => {
-                if (!files?.[0]) return true;
-                return (
-                  files[0].type.startsWith("image/") ||
-                  "Please upload an image file"
-                );
-              },
-            },
             onChange: handleImageChange,
           })}
         />
