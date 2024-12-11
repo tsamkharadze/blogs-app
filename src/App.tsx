@@ -15,6 +15,7 @@ import { avatarAtom, userAtom } from "./store/auth";
 import { AuthGuard } from "./components/route-guards/auth";
 import { getProfileInfo } from "./supabase/account";
 import { LogoutGuard } from "./components/route-guards/logout";
+import CreateBlogView from "./pages/create-blog/view/create-blog-view";
 
 function App() {
   const [user, setUser] = useAtom(userAtom);
@@ -78,6 +79,14 @@ function App() {
                 element={
                   <LogoutGuard>
                     <ProfileView />
+                  </LogoutGuard>
+                }
+              />
+              <Route
+                path="createBlog"
+                element={
+                  <LogoutGuard>
+                    <CreateBlogView />
                   </LogoutGuard>
                 }
               />

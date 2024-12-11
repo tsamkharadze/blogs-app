@@ -17,6 +17,7 @@ import { useAtomValue } from "jotai";
 import { avatarAtom, userAtom } from "@/store/auth";
 import { useMutation } from "@tanstack/react-query";
 import { logout } from "@/supabase/auth";
+import AddBlog from "./create-button";
 
 const Header = () => {
   const { t } = useTranslation();
@@ -63,36 +64,39 @@ const Header = () => {
                 </Button>
               </NavLink>
             ) : (
-              <DropdownMenu>
-                <DropdownMenuTrigger>
-                  {" "}
-                  <Avatar>
-                    {avatar ? (
-                      <div
-                        className="aspect-square w-full"
-                        dangerouslySetInnerHTML={{
-                          __html: avatar,
-                        }}
-                      />
-                    ) : (
-                      <AvatarImage />
-                    )}
-                    <AvatarFallback>CN</AvatarFallback>
-                  </Avatar>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <Link to={"/profile"}>
-                    <DropdownMenuItem>Edit Profile</DropdownMenuItem>
-                  </Link>
-                  <DropdownMenuItem>Help and support </DropdownMenuItem>
-                  <DropdownMenuItem>Give Feedback</DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => handleLogout()}>
-                    Log out
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <div className="flex gap-3">
+                <AddBlog />
+                <DropdownMenu>
+                  <DropdownMenuTrigger>
+                    {" "}
+                    <Avatar>
+                      {avatar ? (
+                        <div
+                          className="aspect-square w-full"
+                          dangerouslySetInnerHTML={{
+                            __html: avatar,
+                          }}
+                        />
+                      ) : (
+                        <AvatarImage />
+                      )}
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <Link to={"/profile"}>
+                      <DropdownMenuItem>Edit Profile</DropdownMenuItem>
+                    </Link>
+                    <DropdownMenuItem>Help and support </DropdownMenuItem>
+                    <DropdownMenuItem>Give Feedback</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => handleLogout()}>
+                      Log out
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
             )}
             <ChangeLagunge />
             <ModeToggle />
