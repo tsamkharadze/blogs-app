@@ -7,4 +7,5 @@ export interface BlogFormInputs {
   description_en?: string | null;
   user_id?: string | null;
   image_url?: string | null;
+  file?: File;
 }
