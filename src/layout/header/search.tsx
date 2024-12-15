@@ -34,12 +34,13 @@ const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(false);
-  const [hasMoreAnswers, setHasMoreAnswers] = useState(false);
+  const [open, setOpen] = useState(false);
   const { i18n } = useTranslation();
   const navigate = useNavigate();
   const lang = i18n.language;
   const limitedBlogs = blogs.slice(0, 5);
   const searchQuery = searchParams.get("search") || "";
+  const hasMoreAnswers = blogs.length > 5;
 
   const handleSearchChange = (value: string) => {
     const queryString = qs.stringify({ search: value }, { skipNulls: true });
@@ -47,20 +48,16 @@ const Search = () => {
   };
 
   useEffect(() => {
-    // if (!searchQuery) {
-    //   setBlogs([]);
-    //   return;
-    // }
-
     const fetchBlogs = async () => {
-      setLoading(true);
+      if (!searchQuery.trim()) {
+        setBlogs([]);
+        return;
+      }
 
+      setLoading(true);
       try {
-        const data = await getFilteredBlogs(searchQuery); // Use the Supabase function
+        const data = await getFilteredBlogs(searchQuery);
         setBlogs(data);
-        searchQuery.length > 0 && data.length > 5
-          ? setHasMoreAnswers(true)
-          : setHasMoreAnswers(false);
       } catch (error) {
         console.error("Error fetching blogs:", error);
         setBlogs([]);
@@ -69,26 +66,39 @@ const Search = () => {
       }
     };
 
-    const timeoutId = setTimeout(fetchBlogs, 300); // Debounce API requests
+    const timeoutId = setTimeout(fetchBlogs, 300);
     return () => clearTimeout(timeoutId);
   }, [searchQuery]);
 
   const handleViewAll = () => {
     const searchParam = searchQuery ? `?search=${searchQuery}` : "";
-    navigate(`/result${searchParam}`); // Correctly formats the URL
+    navigate(`/result${searchParam}`);
+    setOpen(false);
   };
+
+  // const handleSelect = (blogId: number) => {
+  //   navigate(`/blog/${blogId}`);
+  //   setOpen(false);
+  // };
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && searchQuery) {
-      handleViewAll(); // Trigger the view all function on Enter
+      handleViewAll();
     }
   };
+
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger>
-        <SearchIcon />
+    <DropdownMenu open={open} onOpenChange={setOpen}>
+      <DropdownMenuTrigger asChild>
+        <button
+          className="flex items-center gap-2 rounded-md p-2 text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+          aria-label="Search blogs"
+        >
+          <SearchIcon className="h-5 w-5" />
+        </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-96">
-        <Command>
+      <DropdownMenuContent className="w-[300px] p-0" align="end" sideOffset={5}>
+        <Command shouldFilter={false}>
           <CommandInput
             placeholder="Search blogs..."
             value={searchQuery}
@@ -96,71 +106,57 @@ const Search = () => {
             onKeyDown={handleKeyDown}
           />
           <CommandList>
-            {loading && <div className="p-4">Loading...</div>}
-            <CommandEmpty>No blogs found.</CommandEmpty>
-            {blogs.length > 0 && (
+            {loading && (
+              <div className="p-4 text-center text-sm text-muted-foreground">
+                Loading...
+              </div>
+            )}
+            <CommandEmpty className="p-4 text-center text-sm">
+              No blogs found.
+            </CommandEmpty>
+            {blogs.length > 0 && searchQuery && (
               <CommandGroup>
-                {searchQuery
-                  ? lang === "en"
-                    ? limitedBlogs.map((blog) => {
-                        const blogImgUrl = blog.image_url
-                          ? `${import.meta.env.VITE_SUPABASE_BLOG_IMAGES_STORAGE_URL}/${blog.image_url}`
-                          : "";
-                        return (
-                          <CommandItem key={blog.id}>
-                            <div className="flex flex-col">
-                              <div className="flex gap-2">
-                                <img
-                                  src={blogImgUrl}
-                                  alt={
-                                    blog.description_en || "Placeholder image"
-                                  }
-                                  className="h-8 w-8 rounded-lg object-cover"
-                                />
-                                <span className="font-medium">
-                                  {blog.title_en}
-                                </span>
-                              </div>
-                            </div>
-                          </CommandItem>
-                        );
-                      })
-                    : limitedBlogs.map((blog) => {
-                        const blogImgUrl = blog.image_url
-                          ? `${import.meta.env.VITE_SUPABASE_BLOG_IMAGES_STORAGE_URL}/${blog.image_url}`
-                          : "";
+                {limitedBlogs.map((blog) => {
+                  const blogImgUrl = blog.image_url
+                    ? `${import.meta.env.VITE_SUPABASE_BLOG_IMAGES_STORAGE_URL}/${blog.image_url}`
+                    : "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=164&h=164&fit=crop&auto=format";
+                  const title = lang === "en" ? blog.title_en : blog.title_ka;
+                  const description =
+                    lang === "en" ? blog.description_en : blog.description_ka;
 
-                        return (
-                          <CommandItem key={blog.id}>
-                            <div className="flex flex-col">
-                              <div className="flex gap-2">
-                                <img
-                                  src={blogImgUrl}
-                                  alt={
-                                    blog.description_ka || "Placeholder image"
-                                  }
-                                  className="h-8 w-8 rounded-lg object-cover"
-                                />
-                                <span className="font-medium">
-                                  {blog.title_ka}
-                                </span>
-                              </div>
-                            </div>
-                          </CommandItem>
-                        );
-                      })
-                  : ""}
+                  return (
+                    <CommandItem
+                      key={blog.id}
+                      // onSelect={() => handleSelect(blog.id)}
+                      className="flex items-center gap-3 px-4 py-3"
+                    >
+                      <img
+                        src={blogImgUrl}
+                        alt={description || "Blog thumbnail"}
+                        className="h-10 w-10 rounded-lg object-cover"
+                      />
+                      <div className="flex flex-col gap-1">
+                        <span className="line-clamp-1 font-medium">
+                          {title}
+                        </span>
+                        <span className="line-clamp-1 text-xs text-muted-foreground">
+                          {description}
+                        </span>
+                      </div>
+                    </CommandItem>
+                  );
+                })}
               </CommandGroup>
             )}
-            {hasMoreAnswers ? (
-              <button
-                onClick={handleViewAll}
-                className="mt-4 text-blue-500 hover:underline"
-              >
-                View All Results
-              </button>
-            ) : (
-              ""
+            {hasMoreAnswers && (
+              <div className="border-t p-2">
+                <button
+                  onClick={handleViewAll}
+                  className="w-full rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground hover:bg-primary/90"
+                >
+                  View All Results
+                </button>
+              </div>
             )}
           </CommandList>
         </Command>
