@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Cards from "@/pages/home/component/card/cards";
+import Cards from "@/pages/home/component/card/HomeCards";
 
 const Author = () => {
   return (

@@ -43,7 +43,7 @@ const Header = () => {
                 {t("header-translation.home")}
               </p>
             </NavLink>
-            <NavLink to={"/write"}>
+            <NavLink to={"/createBlog"}>
               <p className="cursor-pointer hover:text-foreground dark:hover:text-white">
                 {t("header-translation.write")}
               </p>
