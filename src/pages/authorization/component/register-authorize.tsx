@@ -14,7 +14,7 @@ import { login, registerUser } from "@/supabase/auth";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 type LoginInputs = {
   email: string;
@@ -29,6 +29,9 @@ type RegisterInputs = {
 };
 
 export function Authorization() {
+  const location = useLocation();
+  const toNavigate =
+    location?.state?.from.pathname + location?.state?.from.search || "/";
   const { t } = useTranslation();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -43,7 +46,7 @@ export function Authorization() {
     mutationFn: login,
     onSuccess: () => {
       queryClient.invalidateQueries();
-      navigate("/home");
+      navigate(toNavigate);
     },
   });
 
