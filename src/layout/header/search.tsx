@@ -83,6 +83,7 @@ const Search = () => {
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && searchQuery) {
+      e.preventDefault();
       handleViewAll();
     }
   };
