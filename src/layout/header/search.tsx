@@ -38,9 +38,9 @@ const Search = () => {
   const { i18n } = useTranslation();
   const navigate = useNavigate();
   const lang = i18n.language;
-  const limitedBlogs = blogs.slice(0, 5);
+  const limitedBlogs = blogs.slice(0, 3);
   const searchQuery = searchParams.get("search") || "";
-  const hasMoreAnswers = blogs.length > 5;
+  const hasMoreAnswers = blogs.length > 3;
 
   const handleSearchChange = (value: string) => {
     const queryString = qs.stringify({ search: value }, { skipNulls: true });

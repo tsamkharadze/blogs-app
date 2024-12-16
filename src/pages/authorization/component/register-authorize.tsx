@@ -65,9 +65,7 @@ export function Authorization() {
       password: data.newPassword,
     });
   };
-  console.log(t("authorization-translation.tabs.logIn"));
 
-  console.log(t("authorization-translation.form.buttons.signUp"));
   return (
     <div className="flex h-[500px] min-h-screen items-center justify-center">
       <div className="h-[500px]">

@@ -3,12 +3,15 @@ import { supabase } from "@/supabase";
 import { BlogFormInputs } from "@/types/blog";
 import { useAtomValue } from "jotai";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export const useCreateBlog = () => {
   const user = useAtomValue(userAtom);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const onCreateBlog = async (formValues: BlogFormInputs) => {
+    setLoading(true);
     try {
       if (!formValues?.file || !(formValues.file instanceof FileList)) {
         throw new Error("Invalid file input");
@@ -19,7 +22,6 @@ export const useCreateBlog = () => {
         throw new Error("Please select an image");
       }
 
-      // Upload image with original filename
       const { data: uploadData, error: uploadError } = await supabase.storage
         .from("blog_images")
         .upload(file.name, file);
@@ -41,9 +43,10 @@ export const useCreateBlog = () => {
     } catch (error) {
       console.error("Error creating blog:", error);
     } finally {
+      setLoading(false);
       navigate("/");
     }
   };
 
-  return { onCreateBlog };
+  return { onCreateBlog, loading };
 };

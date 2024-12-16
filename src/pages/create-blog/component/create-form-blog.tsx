@@ -23,7 +23,7 @@ const CreateBlogForm = () => {
     formState: { errors },
   } = useForm<BlogFormInputs>();
   const [georgian, setGeorgian] = useState(false);
-  const { onCreateBlog } = useCreateBlog();
+  const { onCreateBlog, loading } = useCreateBlog(); // Access loading state here
 
   return (
     <form onSubmit={handleSubmit(onCreateBlog)}>
@@ -59,7 +59,9 @@ const CreateBlogForm = () => {
           <Button variant="outline" type="button">
             Cancel
           </Button>
-          <Button type="submit">Publish</Button>
+          <Button type="submit" disabled={loading}>
+            {loading ? "Publishing..." : "Publish"}
+          </Button>
         </CardFooter>
       </Card>
     </form>
