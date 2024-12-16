@@ -17,6 +17,7 @@ import { getProfileInfo } from "./supabase/account";
 import { LogoutGuard } from "./components/route-guards/logout";
 import CreateBlogView from "./pages/create-blog/view/create-blog-view";
 import SearchResultView from "./pages/search-result/view/search-result-view";
+import SingleBlogView from "./pages/single-blog/view/single-blog-view";
 
 function App() {
   const [user, setUser] = useAtom(userAtom);
@@ -67,6 +68,7 @@ function App() {
               <Route path="write" element={<WriteView />} />
               <Route path="about" element={<AboutView />} />
               <Route path="result" element={<SearchResultView />} />
+              <Route path="/blog/:id" element={<SingleBlogView />} />
               <Route
                 path="authorization"
                 element={

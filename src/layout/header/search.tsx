@@ -76,10 +76,10 @@ const Search = () => {
     setOpen(false);
   };
 
-  // const handleSelect = (blogId: number) => {
-  //   navigate(`/blog/${blogId}`);
-  //   setOpen(false);
-  // };
+  const handleSelect = (blogId: number) => {
+    navigate(`/blog/${blogId}`);
+    setOpen(false);
+  };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && searchQuery) {
@@ -127,7 +127,7 @@ const Search = () => {
                   return (
                     <CommandItem
                       key={blog.id}
-                      // onSelect={() => handleSelect(blog.id)}
+                      onSelect={() => handleSelect(blog.id)}
                       className="flex items-center gap-3 px-4 py-3"
                     >
                       <img
