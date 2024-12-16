@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ka";
+import { useNavigate } from "react-router-dom";
 
 interface CardsProps {
   blogsData: BlogFormInputs[];
@@ -12,6 +13,7 @@ interface CardsProps {
 
 const Cards = ({ blogsData, error }: CardsProps) => {
   const { i18n } = useTranslation();
+  const navigate = useNavigate();
   const lang = i18n.language;
   dayjs.extend(relativeTime);
   dayjs.locale(lang === "ka" ? "ka" : "en");
@@ -37,6 +39,7 @@ const Cards = ({ blogsData, error }: CardsProps) => {
           <Card
             key={index}
             className="cursor-pointer md:min-w-[700px] lg:min-w-[900px]"
+            onClick={() => navigate(`/blog/${blog.id}`)}
           >
             <CardHeader>
               {blog?.image_url ? (
