@@ -54,11 +54,11 @@ const SingleBlog = () => {
         />
       </div>
       <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold text-gray-800">
+        <h1 className="text-3xl font-bold text-gray-800 dark:text-white">
           {lang === "ka" ? blog.title_ka : blog.title_en}
         </h1>
         <p className="text-sm text-gray-500">{formattedDate}</p>
-        <p className="text-lg text-gray-700">
+        <p className="text-lg text-gray-700 dark:text-white">
           {lang === "ka" ? blog.description_ka : blog.description_en}
         </p>
       </div>
