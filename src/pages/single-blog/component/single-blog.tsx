@@ -1,4 +1,4 @@
-import { getSingleCountry } from "@/supabase/blogs/get-blogs";
+import { getSingleBlog } from "@/supabase/blogs/get-blogs";
 import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -21,7 +21,7 @@ const SingleBlog = () => {
       if (!id) {
         throw new Error("ID is required");
       }
-      return getSingleCountry(id);
+      return getSingleBlog(id);
     },
   });
 
