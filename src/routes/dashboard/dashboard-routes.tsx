@@ -2,6 +2,7 @@
 
 import { lazy, Suspense } from "react";
 import { Route } from "react-router-dom";
+import { DASHBOARD_PATHS } from "./dashboard.enum";
 
 const HomeView = lazy(() => import("@/pages/home/view/homeview"));
 const WriteBlogView = lazy(() => import("@/pages/write/view/write-view"));
@@ -24,7 +25,7 @@ export const DASHBOARD_ROUTES = [
     }
   />,
   <Route
-    path="home"
+    path={DASHBOARD_PATHS.HOME_PAGE}
     element={
       <Suspense fallback={<div>Loading...</div>}>
         <HomeView />
@@ -32,7 +33,7 @@ export const DASHBOARD_ROUTES = [
     }
   />,
   <Route
-    path="write"
+    path={DASHBOARD_PATHS.WRITE_BLOG}
     element={
       <Suspense fallback={<div>Loading...</div>}>
         <WriteBlogView />
@@ -40,7 +41,7 @@ export const DASHBOARD_ROUTES = [
     }
   />,
   <Route
-    path="about"
+    path={DASHBOARD_PATHS.ABOUT_PAGE}
     element={
       <Suspense fallback={<div>Loading...</div>}>
         <AboutView />
@@ -48,7 +49,7 @@ export const DASHBOARD_ROUTES = [
     }
   />,
   <Route
-    path="/blog/:id"
+    path={DASHBOARD_PATHS.VIEW_BLOG + "/:id"}
     element={
       <Suspense fallback={<div>Loading...</div>}>
         <SingleBlogView />
@@ -56,7 +57,7 @@ export const DASHBOARD_ROUTES = [
     }
   />,
   <Route
-    path="author"
+    path={DASHBOARD_PATHS.BLOG_AUTHOR}
     element={
       <Suspense fallback={<div>Loading...</div>}>
         <AuthorView />

@@ -4,6 +4,7 @@ import { lazy, Suspense } from "react";
 import { Route } from "react-router-dom";
 import { AuthGuard } from "@/components/route-guards/auth";
 import { LogoutGuard } from "@/components/route-guards/logout";
+import { AUTH_PATHS } from "./auth.enum";
 
 const ProfileView = lazy(() => import("@/pages/profile/view/profile-view"));
 const AuthorizationView = lazy(
@@ -15,7 +16,7 @@ const CreateBlogView = lazy(
 
 export const AUTH_ROUTES = [
   <Route
-    path="profile"
+    path={AUTH_PATHS.USER_PROFILE}
     element={
       <LogoutGuard>
         <Suspense fallback={<div>Loading...</div>}>
@@ -25,7 +26,7 @@ export const AUTH_ROUTES = [
     }
   />,
   <Route
-    path="authorization"
+    path={AUTH_PATHS.AUTHORIZATION_PAGE}
     element={
       <AuthGuard>
         <Suspense fallback={<div>Loading...</div>}>
@@ -35,7 +36,7 @@ export const AUTH_ROUTES = [
     }
   />,
   <Route
-    path="createBlog"
+    path={AUTH_PATHS.CREATE_BLOG}
     element={
       <LogoutGuard>
         <Suspense fallback={<div>Loading...</div>}>
