@@ -15,9 +15,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useAtomValue } from "jotai";
 import { avatarAtom, userAtom } from "@/store/auth";
-import { useMutation } from "@tanstack/react-query";
-import { logout } from "@/supabase/auth";
+
 import AddBlog from "./create-button";
+import { useLogOut } from "@/react-query/mutation/auth/authorization";
 
 const Header = () => {
   const { t } = useTranslation();
@@ -25,10 +25,7 @@ const Header = () => {
   const user = useAtomValue(userAtom);
   const avatar = useAtomValue(avatarAtom);
 
-  const { mutate: handleLogout } = useMutation({
-    mutationKey: ["logout"],
-    mutationFn: logout,
-  });
+  const { mutate: handleLogout } = useLogOut();
 
   return (
     <div className="border-b-[1px] bg-white dark:bg-black">

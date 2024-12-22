@@ -10,9 +10,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import AvatarComp from "@/pages/profile/components/avatar";
+import { useEditProfile } from "@/react-query/mutation/edit";
 import { avatarAtom, userAtom } from "@/store/auth";
-import { fillProfileInfo, getProfileInfo } from "@/supabase/account";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { getProfileInfo } from "@/supabase/account";
+import { useQuery } from "@tanstack/react-query";
 import { useAtomValue, useSetAtom } from "jotai";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -49,19 +50,21 @@ const Profile = () => {
     setAvatar(avatarSvg);
   };
 
-  const { mutate: updateProfile } = useMutation({
-    mutationFn: fillProfileInfo,
-    onSuccess: () => {
-      refetch();
-    },
-  });
+  const { mutate: updateProfile } = useEditProfile();
 
   const onSubmit: SubmitHandler<fieldInputs> = (fieldInputs) => {
-    updateProfile({
-      ...fieldInputs,
-      id: userId ?? "",
-      avatar_url,
-    });
+    updateProfile(
+      {
+        ...fieldInputs,
+        id: userId ?? "",
+        avatar_url,
+      },
+      {
+        onSuccess: () => {
+          refetch();
+        },
+      },
+    );
     setAtomAvatar(avatar_url);
   };
   console.log(userProfile);

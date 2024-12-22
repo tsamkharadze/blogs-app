@@ -10,8 +10,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { login, registerUser } from "@/supabase/auth";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  useSignIn,
+  useSignUp,
+} from "@/react-query/mutation/auth/authorization";
+import { useQueryClient } from "@tanstack/react-query";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -41,22 +44,16 @@ export function Authorization() {
 
   const newPassword = registerForm.watch("newPassword");
 
-  const { mutate: handleLogin } = useMutation({
-    mutationKey: ["login"],
-    mutationFn: login,
-    onSuccess: () => {
-      queryClient.invalidateQueries();
-      navigate(toNavigate);
-    },
-  });
-
-  const { mutate: handleRegister } = useMutation({
-    mutationKey: ["register"],
-    mutationFn: registerUser,
-  });
+  const { mutate: handleLogin } = useSignIn();
+  const { mutate: handleRegister } = useSignUp();
 
   const onLoginSubmit: SubmitHandler<LoginInputs> = (data) => {
-    handleLogin(data);
+    handleLogin(data, {
+      onSuccess: () => {
+        navigate(toNavigate);
+        queryClient.invalidateQueries();
+      },
+    });
   };
 
   const onRegisterSubmit: SubmitHandler<RegisterInputs> = (data) => {
