@@ -16,6 +16,7 @@ const CreateBlogView = lazy(
 
 export const AUTH_ROUTES = [
   <Route
+    key="user-profile"
     path={AUTH_PATHS.USER_PROFILE}
     element={
       <LogoutGuard>
@@ -26,6 +27,7 @@ export const AUTH_ROUTES = [
     }
   />,
   <Route
+    key="authorization-page"
     path={AUTH_PATHS.AUTHORIZATION_PAGE}
     element={
       <AuthGuard>
@@ -36,6 +38,7 @@ export const AUTH_ROUTES = [
     }
   />,
   <Route
+    key="create-blog"
     path={AUTH_PATHS.CREATE_BLOG}
     element={
       <LogoutGuard>

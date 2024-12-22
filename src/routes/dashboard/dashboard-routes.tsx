@@ -17,6 +17,7 @@ const SearchResultView = lazy(
 
 export const DASHBOARD_ROUTES = [
   <Route
+    key="home-root"
     path="/"
     element={
       <Suspense fallback={<div>Loading...</div>}>
@@ -25,6 +26,7 @@ export const DASHBOARD_ROUTES = [
     }
   />,
   <Route
+    key="home-page"
     path={DASHBOARD_PATHS.HOME_PAGE}
     element={
       <Suspense fallback={<div>Loading...</div>}>
@@ -33,6 +35,7 @@ export const DASHBOARD_ROUTES = [
     }
   />,
   <Route
+    key="write-blog"
     path={DASHBOARD_PATHS.WRITE_BLOG}
     element={
       <Suspense fallback={<div>Loading...</div>}>
@@ -41,6 +44,7 @@ export const DASHBOARD_ROUTES = [
     }
   />,
   <Route
+    key="about-page"
     path={DASHBOARD_PATHS.ABOUT_PAGE}
     element={
       <Suspense fallback={<div>Loading...</div>}>
@@ -49,6 +53,7 @@ export const DASHBOARD_ROUTES = [
     }
   />,
   <Route
+    key="view-blog"
     path={DASHBOARD_PATHS.VIEW_BLOG + "/:id"}
     element={
       <Suspense fallback={<div>Loading...</div>}>
@@ -57,6 +62,7 @@ export const DASHBOARD_ROUTES = [
     }
   />,
   <Route
+    key="blog-author"
     path={DASHBOARD_PATHS.BLOG_AUTHOR}
     element={
       <Suspense fallback={<div>Loading...</div>}>
@@ -65,6 +71,7 @@ export const DASHBOARD_ROUTES = [
     }
   />,
   <Route
+    key="search-result"
     path="result"
     element={
       <Suspense fallback={<div>Loading...</div>}>
