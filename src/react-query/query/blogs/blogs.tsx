@@ -8,7 +8,7 @@ export const useGetBlogs = () => {
   });
 };
 
-export const useGetSingleBlog = (id: string) => {
+export const useGetSingleBlog = (id: string | undefined) => {
   return useQuery({
     queryKey: ["single-country", id],
     queryFn: () => {
