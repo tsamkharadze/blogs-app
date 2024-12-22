@@ -1,5 +1,5 @@
-import { getSingleBlog } from "@/supabase/blogs/get-blogs";
-import { useQuery } from "@tanstack/react-query";
+import { useGetSingleBlog } from "@/react-query/query/blogs/blogs";
+
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useTranslation } from "react-i18next";
@@ -11,19 +11,7 @@ const SingleBlog = () => {
   const { id } = useParams();
   dayjs.extend(relativeTime);
   dayjs.locale(lang === "ka" ? "ka" : "en");
-  const {
-    data: blog,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["single-country", id],
-    queryFn: () => {
-      if (!id) {
-        throw new Error("ID is required");
-      }
-      return getSingleBlog(id);
-    },
-  });
+  const { data: blog, isLoading, error } = useGetSingleBlog(id);
 
   // Handle loading and error states
   if (isLoading) {

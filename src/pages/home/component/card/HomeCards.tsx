@@ -1,13 +1,8 @@
 import Cards from "@/components/reusable-components/cards";
-import { getBlogs } from "@/supabase/blogs/get-blogs";
-import { useQuery } from "@tanstack/react-query";
+import { useGetBlogs } from "@/react-query/query/blogs/blogs";
 
 const HomeCards = () => {
-  const { data: blogsData, error: blogsError } = useQuery({
-    queryKey: ["blogs"],
-    queryFn: getBlogs,
-  });
-
+  const { data: blogsData, error: blogsError } = useGetBlogs();
   return <Cards blogsData={blogsData ?? []} error={blogsError} />;
 };
 

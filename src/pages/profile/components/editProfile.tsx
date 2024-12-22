@@ -10,10 +10,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import AvatarComp from "@/pages/profile/components/avatar";
-import { useEditProfile } from "@/react-query/mutation/edit";
+import { useEditProfile } from "@/react-query/mutation/edit/edit";
+import { useGetProfile } from "@/react-query/query/profile/profile";
 import { avatarAtom, userAtom } from "@/store/auth";
-import { getProfileInfo } from "@/supabase/account";
-import { useQuery } from "@tanstack/react-query";
 import { useAtomValue, useSetAtom } from "jotai";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -35,16 +34,7 @@ const Profile = () => {
   const { register, handleSubmit, formState } = useForm<fieldInputs>();
 
   // Fetch profile
-  const {
-    data: userProfile,
-    refetch,
-    isLoading,
-  } = useQuery({
-    queryKey: ["profileInfo", userId],
-    queryFn: () => getProfileInfo(userId!),
-    enabled: !!userId,
-    select: (data) => data?.data?.[0],
-  });
+  const { data: userProfile, refetch, isLoading } = useGetProfile(userId);
 
   const handleAvatarSelect = (avatarSvg: string) => {
     setAvatar(avatarSvg);
