@@ -34,7 +34,12 @@ const Profile = () => {
   const { register, handleSubmit, formState } = useForm<fieldInputs>();
 
   // Fetch profile
-  const { data: userProfile, refetch, isLoading } = useGetProfile(userId);
+  const {
+    data: userProfile,
+    refetch,
+    isLoading,
+  } = useGetProfile({ userId: userId as string });
+  console.log(userProfile);
 
   const handleAvatarSelect = (avatarSvg: string) => {
     setAvatar(avatarSvg);

@@ -11,7 +11,11 @@ const SingleBlog = () => {
   const { id } = useParams();
   dayjs.extend(relativeTime);
   dayjs.locale(lang === "ka" ? "ka" : "en");
-  const { data: blog, isLoading, error } = useGetSingleBlog(id);
+  const {
+    data: blog,
+    isLoading,
+    error,
+  } = useGetSingleBlog({ id: id as string });
 
   // Handle loading and error states
   if (isLoading) {
